@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  catalogueservice:
+    image: docker.io/pouyasameni/offerup-catalogueservice:development
+    ports:
+      - "8083:8083"
+    networks:
+      offerup-network:
+        ipv4_address: 172.20.0.2
+    environment:
+      - TZ=America/Toronto
+
+  auctionservice:
+    image: docker.io/pouyasameni/offerup-auctionservice:development
+    ports:
+      - "8082:8082"
+    networks:
+      offerup-network:
+        ipv4_address: 172.20.0.3
+    environment:
+      - TZ=America/Toronto
+
+  accountservice:
+    image: docker.io/pouyasameni/offerup-accountservice:development
+    ports:
+      - "8081:8081"
+    networks:
+      offerup-network:
+        ipv4_address: 172.20.0.4
+    environment:
+      - TZ=America/Toronto
+
+  paymentservice:
+    image: docker.io/pouyasameni/offerup-paymentservice:development
+    ports:
+      - "8084:8084"
+    networks:
+      offerup-network:
+        ipv4_address: 172.20.0.5
+    environment:
+      - TZ=America/Toronto
+
+  controller:
+    image: docker.io/pouyasameni/offerup-controller:development
+    ports:
+      - "8080:8080"
+    networks:
+      offerup-network:
+        ipv4_address: 172.20.0.6
+    environment:
+      - TZ=America/Toronto
+
+networks:
+  offerup-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
