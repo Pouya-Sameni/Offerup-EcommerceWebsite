@@ -51,6 +51,16 @@ services:
     environment:
       - TZ=America/Toronto
 
+  frontend:
+    image: docker.io/pouyasameni/offerup-frontend:production
+    ports:
+      - "80:3000"
+    networks:
+      offerup-network:
+        ipv4_address: 172.20.0.7
+    environment:
+      - TZ=America/Toronto
+      
 networks:
   offerup-network:
     driver: bridge
